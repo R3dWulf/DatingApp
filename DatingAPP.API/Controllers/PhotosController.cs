@@ -64,7 +64,7 @@ namespace DatingAPP.API.Controllers
             
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            if (currentUserId != userId)
+            if (currentUserId != user.Id)
                 return Unauthorized();
 
             var file = photoDto.File;
