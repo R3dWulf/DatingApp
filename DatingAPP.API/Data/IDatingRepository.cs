@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DatingAPP.API.Models;
 using DatingAPP.API.Modules;
 
 namespace DatingAPP.API.Data
@@ -11,5 +12,6 @@ namespace DatingAPP.API.Data
          Task<bool> SaveAll(); 
          Task<IEnumerable<User>> GetUsers();
          Task<User> GetUser(int id);
+         Task<Photo> GetPhoto(int id);
     }
 }
