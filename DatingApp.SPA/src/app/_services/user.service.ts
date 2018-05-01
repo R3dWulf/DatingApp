@@ -33,6 +33,12 @@ export class UserService {
         return this.authHttp.put(this.baseUrl + 'users/' + id, user).catch(this.handleError);
     }
 
+    setMainPhoto(userId: number, id: number) {
+        return this.authHttp
+            .post(this.baseUrl + 'users/' + userId + '/photos/' + id + '/setMain', {})
+            .catch(this.handleError);
+    }
+
     private handleError(error: any) {
         const applicationError = error.headers.get('Application-Error');
         if (applicationError) {
