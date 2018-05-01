@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-photo-editor',
@@ -16,6 +17,7 @@ export class PhotoEditorComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZone = false;
   baseUrl = environment.apiUrl;
+  currentMain: Photo;
 
   constructor(private authService: AuthService, private userService: UserService, private alertify: AlertifyService) { }
 
@@ -58,7 +60,9 @@ export class PhotoEditorComponent implements OnInit {
     this.userService
       .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
       .subscribe(() => {
-        console.log('Successfully set photo as main');
+        this.currentMain = _.findWhere(this.photos, {isMain: true});
+        this.currentMain.isMain = false;
+        photo.isMain = true;
       }, error => {
         this.alertify.error(error);
       });
