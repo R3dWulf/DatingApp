@@ -32,6 +32,9 @@
       </form>
 
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
+        <li>
+          <img src="{{authService.currentUser.photoUrl}}" atl="" />
+        </li>
         <li class="dropdown" dropdown>
           <a (clicked)="false" class="dropdown-toggle" dropdownToggle>Welcome {{authService.decodedToken?.unique_name | titlecase}}<span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu>
