@@ -97,10 +97,11 @@ namespace DatingAPP.API.Controllers
 
             user.Photos.Add(photo);
 
-            var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
+           
 
             if (await _repo.SaveAll())
             {
+                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return CreatedAtRoute("GetPhoto", new { id = photo.id }, photoToReturn);
             }
             return BadRequest("Could not add photo");  
@@ -132,6 +133,42 @@ namespace DatingAPP.API.Controllers
                     return NoContent(); // Success status code 204, no need to return anything back 
 
                 return BadRequest("Could not set photo as main.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int userId, int id)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var photoFromRepo = await _repo.GetPhoto(id);
+
+            if (photoFromRepo == null)
+                return NotFound();
+
+            if (photoFromRepo.IsMain)
+                return BadRequest("Cannot delete main photo");
+
+            if (photoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+
+                var results = _cloudinary.Destroy(deleteParams);
+
+                if ( results.Result == "ok")
+                    _repo.Delete(photoFromRepo);
+            }
+
+            if(photoFromRepo.PublicId == null)
+            {
+                _repo.Delete(photoFromRepo);
+            }
+
+
+            if ( await _repo.SaveAll() )
+                return Ok();
+
+            return BadRequest("Failed to delete photo");
         }
 
     }
