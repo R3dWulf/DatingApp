@@ -4,16 +4,36 @@
 
   <hr>
 
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{'has-error': registerForm.get('username').errors && registerForm.get('username').touched}">
     <input type="text" class="form-control" placeholder="Username" formControlName="username"  autocomplete="off">
+    <span class="help-block" *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
+      Username is required
+    </span>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{'has-error': registerForm.get('password').errors && registerForm.get('password').touched}">
     <input type="password" class="form-control" placeholder="Password" formControlName="password" autocomplete="off">
+    <span class="help-block" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+      Password is required
+    </span>
+    <span class="help-block" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+      Password must be at least 4 characters
+    </span>
+    <span class="help-block" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+      Password must not exceed 8 characters
+    </span>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{'has-error': registerForm.get('confirmPassword').errors 
+    && registerForm.get('confirmPassword').touched || registerForm.get('confirmPassword').touched
+    && registerForm.hasError('mismatch')}">
     <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword" autocomplete="off">
+    <span class="help-block" *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+      Confirm Password is required
+    </span>
+    <span class="help-block" *ngIf="registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')">
+      Confirm Password must match password
+    </span>
   </div>
 
   <div class="form-group text-center">
