@@ -1,6 +1,6 @@
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './_guards/auth.guard';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -55,7 +55,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     AuthModule,
     TabsModule.forRoot(),
     NgxGalleryModule,
-    FileUploadModule
+    FileUploadModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
