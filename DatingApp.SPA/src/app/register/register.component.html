@@ -23,9 +23,7 @@
 
   <!-- knownAs -->
   <div class="form-group" [ngClass]="{'has-error': registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')}">
-      
-    <input class="form-control" placeholder="Known as" formControlName="knownAs">
-      
+    <input class="form-control" placeholder="Known as" formControlName="knownAs"> 
     <span class="help-block" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">
       Known as is required
     </span>
@@ -34,30 +32,23 @@
 
   <!-- date of birth -->
   <div class="form-group" [ngClass]="{'has-error': registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')}">
-      
-    <input class="form-control" type="date" placeholder="Date of Birth" formControlName="dateOfBirth">
-      
+    <input class="form-control" type="text" bsDatepicker [bsConfig]="bsConfig" placeholder="Date of Birth" formControlName="dateOfBirth">  
     <span class="help-block" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">
       Date of birth is required
     </span>
-    
   </div>
 
   <!-- city -->
   <div class="form-group" [ngClass]="{'has-error': registerForm.get('city').touched && registerForm.get('city').hasError('required')}">
-      
-    <input class="form-control" placeholder="City" formControlName="city">
-      
+    <input class="form-control" placeholder="City" formControlName="city">  
     <span class="help-block" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">
       City is required
     </span> 
   </div>
 
   <!-- country -->
-  <div class="form-group" [ngClass]="{'has-error': registerForm.get('country').touched && registerForm.get('country').hasError('required')}">
-      
-    <input class="form-control" placeholder="Country" formControlName="country">
-      
+  <div class="form-group" [ngClass]="{'has-error': registerForm.get('country').touched && registerForm.get('country').hasError('required')}"> 
+    <input class="form-control" placeholder="Country" formControlName="country">  
     <span class="help-block" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">
       Country is required
     </span>
