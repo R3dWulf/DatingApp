@@ -17,13 +17,18 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const token = localStorage.getItem('token');
     const user: User = JSON.parse(localStorage.getItem('user'));
+
     if (token) {
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
     }
 
     if (user) {
       this.authService.currentUser = user;
-      this.authService.changeMemberPhoto(user.photoUrl);
+      if (this.authService.currentUser.photoUrl !== null ) {
+        this.authService.changeMemberPhoto(user.photoUrl);
+      } else {
+        this.authService.changeMemberPhoto('../assets/user.png');
+      }
     }
 
   }
