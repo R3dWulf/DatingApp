@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="panel panel-default">
-        <img class ="profile-image thumbnail " src="{{user.photoUrl ? user.photoUrl : '../../../assets/user.png'}}"" alt="{{user.knownAs}}">
+        <img class ="profile-image thumbnail " src="{{user.photoUrl ? user.photoUrl : '../../../assets/user.png'}}" alt="{{user.knownAs}}">
         <div class="panel-body">
           <div>
             <strong>Location: </strong>
@@ -18,11 +18,11 @@
           </div>
           <div>
             <strong>Last Active: </strong>
-            <p>{{user.lastActive}}</p>
+            <p>{{user.lastActive | timeAgo}}</p>
           </div>
           <div>
             <strong>Member Since: </strong>
-            <p>{{user?.created}}</p>
+            <p>{{user.created | date: 'mediumDate'}}</p>
           </div>
         </div>
         <div class="panel-footer">
