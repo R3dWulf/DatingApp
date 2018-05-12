@@ -67,7 +67,15 @@ export class UserService {
         return this.authHttp.delete(this.baseUrl + 'users/' + userId + '/photos/' + id).catch(this.handleError);
     }
 
+    sendLike( id: number, recipientId: number ) {
+        return this.authHttp.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {} ).catch(this.handleError);
+    }
+
+
     private handleError(error: any) {
+        if (error.status === 400) {
+            return Observable.throw(error._body);
+        }
         const applicationError = error.headers.get('Application-Error');
         if (applicationError) {
             return Observable.throw(applicationError);
