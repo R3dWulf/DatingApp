@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { PaginatedResult } from '../_models/Pagination';
+import { Message } from '../_models/message';
 
 
 @Injectable()
@@ -77,6 +78,27 @@ export class UserService {
 
     sendLike( id: number, recipientId: number ) {
         return this.authHttp.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {} ).catch(this.handleError);
+    }
+
+    getMessages( id: number, page?: number, itemsPerPage?: number, messageContainer?: string) {
+        const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
+        let queryString = '?MessageContainer=' + messageContainer;
+
+        if ( page != null && itemsPerPage != null ) {
+            queryString += '&pagenumber=' + page + '&pagesize=' + itemsPerPage;
+        }
+
+        return this.authHttp
+            .get(this.baseUrl + 'users/' + id + '/messages' + queryString )
+            .map( (response: Response) => {
+                paginatedResult.result = response.json();
+
+                if ( response.headers.get('Pagination') != null ) {
+                    paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+                }
+
+                return paginatedResult;
+            }).catch(this.handleError);
     }
 
 
