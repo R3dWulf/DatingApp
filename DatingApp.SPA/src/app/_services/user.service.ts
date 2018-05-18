@@ -101,6 +101,11 @@ export class UserService {
             }).catch(this.handleError);
     }
 
+    getMessageThread(id: number, recipientId: number) {
+        return this.authHttp.get( this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId ).map( (response: Response ) => {
+            return response.json();
+        }).catch(this.handleError);
+    }
 
     private handleError(error: any) {
         if (error.status === 400) {

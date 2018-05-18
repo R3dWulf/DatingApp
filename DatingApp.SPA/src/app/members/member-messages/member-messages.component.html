@@ -1,0 +1,57 @@
+<div class="panel-pimary">
+  <div class="panel-body">
+    <div *ngIf="messages?.length === 0">
+      <p>No messages yet.. Say hi by using the messsage box below</p>
+    </div>
+
+    <ul class="chat"> 
+      <li *ngFor="let message of messages">
+        <!--To Them-->
+        <div *ngIf="message.senderId == userId">
+          <span class="chat-image pull-left">
+            <img src="{{message.senderPhotoUrl}}" alt="" class="img-circle" >
+          </span>
+
+          <div class="chat-body">
+            <div class="header">
+              <strong class="primary-font">{{message.senderKnownAs}}</strong>
+              <small class="text-muted pull-right">
+                <span class="fa fa-clock-o">{{message.messageSent | timeAgo}}</span>
+              </small>
+            </div>
+            <p>{{message.content}}</p>
+          </div>
+        </div>
+
+        <!--To Me-->
+        <div *ngIf="message.senderId != userId">
+          <span class="chat-img pull-right">
+            <img src="{{message.senderPhotoUrl}}" alt="" class="img-circle" >
+          </span>
+
+          <div class="chat-body">
+            <div class="header">
+              <small class="text-muted">
+                <span class="fa fa-clock-o">{{message.messageSent | timeAgo}}</span>
+                <span *ngIf="!message.isRead" class="text-muted text-danger">(Unread)</span>
+                <span *ngIf="message.isRead" class="text-muted text-success">(Read {{message.dateRead | timeAgo})</span>
+              </small>
+              <strong class="primary-font pull-right">{{message.senderKnownAs}}</strong>
+            </div>
+            <p>{{message.content}}</p>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+  </div>
+  <div class="panel-footer">
+    <form action="">
+      <div class="input-group">
+        <input type="text" class="form-control input-sm" placeholder="Send a private message">
+        <span class="input-group-btn"><button class="btn btn-primary btn-sm">Send</button></span>
+      </div>
+    </form>
+  </div>
+</div>
