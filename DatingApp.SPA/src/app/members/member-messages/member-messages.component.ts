@@ -3,6 +3,7 @@ import { Message } from '../../_models/message';
 import { UserService } from '../../_services/user.service';
 import { AuthService } from '../../_services/auth.service';
 import { AlertifyService } from '../../_services/alertify.service';
+import { TypeaheadOptions } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-member-messages',
@@ -12,6 +13,8 @@ import { AlertifyService } from '../../_services/alertify.service';
 export class MemberMessagesComponent implements OnInit {
   @Input() userId: number;
   messages: Message[];
+  newMessage: any = {};
+
     constructor(
     private userService: UserService,
     private authService: AuthService,
@@ -28,6 +31,17 @@ export class MemberMessagesComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     } );
+  }
+
+  sendMessage() {
+    this.newMessage.recipientId = this.userId;
+    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
+      .subscribe( message => {
+        this.messages.unshift(message);
+        this.newMessage.content = '';
+      }, error => {
+        this.alertify.error(error);
+      });
   }
 
 }
