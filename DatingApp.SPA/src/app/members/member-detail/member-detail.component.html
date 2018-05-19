@@ -31,7 +31,7 @@
               <button class="btn btn-primary">Like</button>
             </div>
             <div class="btn-group">
-              <button class="btn btn-success">Message</button>
+              <button class="btn btn-success" (click)="selectTab(3)">Message</button>
             </div>
           </div>
         </div>
@@ -40,20 +40,24 @@
 
     <div class="col-sm-8">
       <div class="tab-panel">
-          <tabset class="member-tabset">
+          <tabset class="member-tabset" #memberTabs>
+              <!--Tab 0-->
               <tab heading="About {{user?.knownAs}}">
                 <h4>Description</h4>
-                <p>{{user.introduction}}</p>
+                <p>{{user?.introduction}}</p>
                 <h4>Looking For</h4>
                 <p>{{user.lookingFor}}</p>
               </tab>
+              <!--Tab 1-->
               <tab heading="Interests">
                 <h4>Description</h4>
-                <p>{{user.interests}}</p>
+                <p>{{user?.interests}}</p>
               </tab>
+              <!--Tab 2-->
               <tab heading="Photos">
                 <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
               </tab>
+              <!--Tab 3-->
               <tab heading="Messages">
                 <app-member-messages [userId]="user.id" ></app-member-messages>
               </tab>
