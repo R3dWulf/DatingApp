@@ -1,4 +1,3 @@
-import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -61,7 +60,6 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    AuthModule,
     TabsModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule,
@@ -75,7 +73,7 @@ import { HttpClientModule } from '@angular/common/http';
         tokenGetter: () => {
           return localStorage.getItem('token');
         },
-        whitelistedDomains: ['localost:5000']
+        whitelistedDomains: ['localhost:5000']
       }
     })
   ],
