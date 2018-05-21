@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+/*import 'rxjs/add/operator/catch';*/
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../_models/User';
@@ -42,13 +42,11 @@ export class AuthService {
                         this.changeMemberPhoto('../../assets/user.png');
                     }
                 }
-            })
-            .catch(this.handleError);
+            });
     }
 
     register(user: User) {
-        return this.http.post(this.baseUrl + 'register', user, {headers: new HttpHeaders().set('Content-Type', 'application/json')})
-        .catch(this.handleError);
+        return this.http.post(this.baseUrl + 'register', user, {headers: new HttpHeaders().set('Content-Type', 'application/json')});
     }
 
     loggedIn() {
@@ -59,25 +57,6 @@ export class AuthService {
         }
 
         return !this.jwtHelperService.isTokenExpired(token);
-    }
-
-    private handleError(error: any) {
-        const applicationError = error.headers.get('Application-Error');
-        if (applicationError) {
-            return Observable.throw(applicationError);
-        }
-        const serverError = error.json();
-        let modelStateErrors = '';
-        if (serverError) {
-            for (const key in serverError) {
-                if (serverError[key]) {
-                    modelStateErrors += serverError[key] + '\n';
-                }
-            }
-        }
-        return Observable.throw(
-            modelStateErrors || 'Server error'
-        );
     }
 
 }
