@@ -15,7 +15,7 @@ import * as _ from 'underscore';
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
   uploader: FileUploader;
-  hasBaseDropZone = false;
+  hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
   currentMain: Photo;
   @Output() getMemberPhotoChange = new EventEmitter<string>();
@@ -27,7 +27,7 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   public fileOverBase(e: any): void {
-    this.hasBaseDropZone = e;
+    this.hasBaseDropZoneOver = e;
   }
 
   intializeUploader() {
