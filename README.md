@@ -1,5 +1,5 @@
 # **Dating App**
-###### *C#, ASP.NET, SQLite, MySQL, Cloudinary* ######
+###### *C#, ASP.NET CORE 2.0, SQLite, MySQL, Cloudinary* ######
 
 ![alt text](https://github.com/R3dWulf/DatingApp/blob/master/Git-Images/HomePage.png)
 The home page of the daing app.
@@ -51,3 +51,5 @@ The like page will show the user all members that have liked them.
 
 ![alt text](https://github.com/R3dWulf/DatingApp/blob/master/Git-Images/RegisterPage.png)
 For new users to join they would need only to fill out the registration form.  
+
+This was built using [Udemy](https://www.udemy.com/build-an-app-with-aspnet-core-and-angular-from-scratch/).
