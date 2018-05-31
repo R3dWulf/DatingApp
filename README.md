@@ -1,5 +1,5 @@
 # **Dating App**
-###--C#, ASP.NET, SQLite, MySQL, Cloudinary--
+######--C#, ASP.NET, SQLite, MySQL, Cloudinary--
 
 ![alt text](https://github.com/R3dWulf/DatingApp/blob/master/Git-Images/HomePage.png)
 The home page of the daing app.
